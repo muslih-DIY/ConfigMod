@@ -15,13 +15,24 @@ class config:
         if path==None:
             self.PATH = os.path.join(Path(__file__).resolve().parent, 'config.ini')
         
-        
-    
+    class DictClass(object):
+        def __init__(self, **kwargs):
+            self._kwargs = kwargs
+            for key in kwargs:
+                setattr(self, key, kwargs[key])  
+                      
+        def __repr__(self) -> str:
+            kstr = ', '.join([f"{k}={i}" for  k,i in self._kwargs.items()])
+            return f'DictClass({kstr})'
 
     def load(self):
         configfile = self.readConfigDict()
         for conf_name,conf in configfile.items():
-            setattr(self,conf_name,self._config_class[conf['class_type']](**conf))
+            class_type = conf.get('class_type',None)
+            if class_type is None:
+                setattr(self,conf_name,self.DictClass(**conf))
+                continue
+            setattr(self,conf_name,self._config_class[class_type](**conf))
 
     
     def register(self,confclasses:list):
