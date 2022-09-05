@@ -12,8 +12,7 @@ class config:
     PATH = os.path.join(Path(__file__).resolve().parent, 'config.ini')
     def __init__(self,path: str=None) -> None:
         
-        if not path:
-            self.PATH = path
+        if path:self.PATH = path
         
     class DictClass(object):
         def __init__(self, **kwargs):
