@@ -5,15 +5,15 @@ import os
 
 class config:
 
-
     _config_class = {}
         # '_oracledb':_oracledb,
         # '_postgresdb':_postgresdb
         # }
-
+    PATH = os.path.join(Path(__file__).resolve().parent, 'config.ini')
     def __init__(self,path: str=None) -> None:
-        if path==None:
-            self.PATH = os.path.join(Path(__file__).resolve().parent, 'config.ini')
+        
+        if not path:
+            self.PATH = path
         
     class DictClass(object):
         def __init__(self, **kwargs):
