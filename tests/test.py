@@ -12,7 +12,6 @@ from ClassConfig import config
 
 @dataclass
 class _oracledb:
-    class_type:str
     dbname  :str 
     dbuser  :str 
     host    :str 
@@ -25,7 +24,6 @@ class _oracledb:
 
 @dataclass
 class _postgresdb:
-    class_type:str
     dbname  :str
     dbuser  :str
     host    :str
