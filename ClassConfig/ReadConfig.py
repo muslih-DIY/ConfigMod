@@ -51,10 +51,8 @@ class config:
 
         for path in self._config_paths:
             configfile = config.readConfigDict(path)
-            print(path)
             for conf_name,conf in configfile.items():
-                print(conf)
-                class_type = conf.get('class_type',None)
+                class_type = conf.pop('class_type',None)
                 if class_type and self._config_class.get(class_type):
                     setattr(self,conf_name,self._config_class[class_type](**conf))
                     continue
