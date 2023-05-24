@@ -10,7 +10,11 @@ class config:
         # }
     _config_paths: list = None
 
-    def __init__(self,path:str|list|None=None) -> None:
+    def __init__(self,path=None) -> None:
+        """
+        path should be list|str
+
+        """
         self.path = path
 
     @property
@@ -19,14 +23,15 @@ class config:
         return self._config_paths
 
     @path.setter
-    def path(self,path:str|list|None=None):
+    def path(self,path=None):
         if path is None:
             self._config_paths = []
-        if isinstance(path,str):
+        elif isinstance(path,str):
             self._config_paths = [path]
-        if isinstance(path,list):
+        elif isinstance(path,list):
             self._config_paths = path
-
+        else:
+            raise ValueError('path should be list|str')
     class DictClass(object):
         "create a class from dict"
         def __init__(self, **kwargs):
